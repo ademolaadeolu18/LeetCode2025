@@ -1,4 +1,4 @@
-# Group Anagrams
+# 1 Group Anagrams
 """
 Given an array of strings strs, group the 
 anagrams
@@ -48,3 +48,43 @@ def groupAnagrams(strs):
 inputstr = ["eat","tea","tan","ate","nat","bat"]
 
 print(groupAnagrams(inputstr))
+
+
+
+
+# 2 Top K Frequent Elements
+"""
+Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+Example 2:
+
+Input: nums = [1], k = 1
+Output: [1]
+ 
+"""
+
+def topKFrequentElements(nums, k):
+    d = {}
+    arr = []
+    res = []
+    for num in nums: 
+        if num not in d:
+            d[num]= 0 
+        d[num]+=1
+
+    for num, count in d.items():
+        arr.append((count, num))
+    arr.sort()
+    while len(res) < k:
+        res.append(arr.pop()[1])
+    return res
+nums = [1]
+k = 1
+
+print(topKFrequentElements(nums, k))
