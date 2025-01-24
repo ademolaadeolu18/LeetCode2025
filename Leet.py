@@ -132,7 +132,7 @@ print(topkFrequent(words, k))
 
 
 
-# Encode and Decode Strings
+# 4 Encode and Decode Strings
 """
 Solved 
 Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
@@ -171,3 +171,66 @@ def decode(s):
 
 Input =  ["we","say",":","yes"]
 print(decode(encode(Input)))
+
+
+# 5 Products of Array Except Self
+
+"""
+
+Solved 
+Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
+
+Each product is guaranteed to fit in a 32-bit integer.
+
+Follow-up: Could you solve it in 
+O
+(
+n
+)
+O(n) time without using the division operation?
+
+Example 1:
+
+Input: nums = [1,2,4,6]
+
+Output: [48,24,12,8]
+Example 2:
+
+Input: nums = [-1,0,1,2,3]
+
+Output: [0,-6,0,0,0]
+"""
+
+
+def product(nums):
+    n = len(nums)
+    prefix = [1] * n
+    postfix = [1] * n
+    for i in range(1, n):
+        prefix[i] = nums[i-1] * prefix[i-1]
+    for i in range(n-2, -1, -1):
+        postfix[i] = nums[i+1] * postfix[i+1]
+    res = []
+    for i in range(n):
+        res.append(prefix[i] * postfix[i])
+    return res
+
+arr = [-1,0,1,2,3]
+print(product(arr))
+
+
+
+# arr = [1,2,3,4]
+# prefix = [1,1,1,1]
+
+# for i in range(1, len(arr)):
+#     prefix[i] = arr[i-1] * prefix[i-1]
+
+# print(prefix)
+
+# postfix = [1,1,1,1]
+
+# for i in range(len(arr)-2, -1, -1):
+#     postfix[i] = arr[i+1] * postfix[i+1]
+
+# print(postfix)
