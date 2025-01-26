@@ -363,3 +363,40 @@ def checkValid(matrix):
 
 matrix = [[1,2,3],[3,1,2],[2,3,1]]
 print(checkValid(matrix))
+
+# 8 Longest Consecutive Sequence
+
+"""
+Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+You must write an algorithm that runs in O(n) time.
+
+ 
+
+Example 1:
+
+Input: nums = [100,4,200,1,3,2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+Example 2:
+
+Input: nums = [0,3,7,2,5,8,4,6,0,1]
+Output: 9
+"""
+
+def longestConsecutive(nums):
+    numset = set(nums)
+    max_sequence = float("-inf")
+
+    for num in numset:
+        if (num - 1) not in numset:
+            length = 1
+            while (num + length) in numset:
+                length+=1
+            max_sequence = max(max_sequence, length)
+    return max_sequence
+
+
+nums = [0,3,7,2,5,8,4,6,0,1]
+
+print(longestConsecutive(nums))
