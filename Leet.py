@@ -501,4 +501,45 @@ def search(matrix, target):
 
 matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
 target = 3
-print(search(matrix, target))
+# print(search(matrix, target))
+
+
+# 11  Search a 2D Matrix II
+
+"""
+Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+
+Integers in each row are sorted in ascending from left to right.
+Integers in each column are sorted in ascending from top to bottom.
+ 
+
+Example 1:
+
+
+Input: matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5
+Output: true
+Example 2:
+
+
+Input: matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20
+Output: false
+"""
+
+def search2(matrix, target):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    for row in range(rows):
+        l = 0
+        r = cols - 1
+        while l <= r:
+            m = (l + r) // 2
+            if target == matrix[row][m]:
+                return True
+            elif target > matrix[row][m]:
+                l = m + 1
+            else:
+                r = m - 1
+    return False
+matrix , target = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]] , 20
+
+print(search2(matrix, target))
