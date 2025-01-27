@@ -48,7 +48,7 @@ def groupAnagrams(strs):
 
 inputstr = ["eat","tea","tan","ate","nat","bat"]
 
-print(groupAnagrams(inputstr))
+# print(groupAnagrams(inputstr))
 
 
 
@@ -88,7 +88,7 @@ def topKFrequentElements(nums, k):
 nums = [1]
 k = 1
 
-print(topKFrequentElements(nums, k))
+# print(topKFrequentElements(nums, k))
 
 
 
@@ -127,7 +127,7 @@ def topkFrequent(words, k):
 
 words = ["the","day","is","sunny","the","the","the","sunny","is","is"]
 k = 4
-print(topkFrequent(words, k))
+# print(topkFrequent(words, k))
 
 
 
@@ -171,7 +171,7 @@ def decode(s):
     return res
 
 Input =  ["we","say",":","yes"]
-print(decode(encode(Input)))
+# print(decode(encode(Input)))
 
 
 # 5 Products of Array Except Self
@@ -217,7 +217,7 @@ def product(nums):
     return res
 
 arr = [-1,0,1,2,3]
-print(product(arr))
+# print(product(arr))
 
 
 
@@ -313,7 +313,7 @@ board = ([["8","3",".",".","7",".",".",".","."]
 ,[".",".",".",".","8",".",".","7","9"]])
 
 
-print(isValidSudoku(board))
+# print(isValidSudoku(board))
 
 
 
@@ -362,7 +362,7 @@ def checkValid(matrix):
     return True
 
 matrix = [[1,2,3],[3,1,2],[2,3,1]]
-print(checkValid(matrix))
+# print(checkValid(matrix))
 
 # 8 Longest Consecutive Sequence
 
@@ -399,7 +399,7 @@ def longestConsecutive(nums):
 
 nums = [0,3,7,2,5,8,4,6,0,1]
 
-print(longestConsecutive(nums))
+# print(longestConsecutive(nums))
 
 
 
@@ -442,4 +442,63 @@ def binarySearch(nums, target):
 
 nums = [-1,0,2,4,6,8]
 target = 3
-print(binarySearch(nums, target))
+# print(binarySearch(nums, target))
+
+
+# 10 Search a 2D Matrix
+
+"""
+You are given an m x n integer matrix matrix with the following two properties:
+
+Each row is sorted in non-decreasing order.
+The first integer of each row is greater than the last integer of the previous row.
+Given an integer target, return true if target is in matrix or false otherwise.
+
+You must write a solution in O(log(m * n)) time complexity.
+
+ 
+
+Example 1:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+Example 2:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+Output: false
+
+"""
+def search(matrix, target):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    top = 0
+    bottom = rows - 1
+    while top <= bottom:
+        midrow = (top + bottom)//2
+        if target < matrix[midrow][0]:
+            bottom = midrow - 1
+        elif target > matrix[midrow][-1]:
+            top = midrow + 1
+        else:
+            break
+    if not (top <= bottom):
+        return False
+    
+    midrow = (top + bottom) // 2
+    l = 0
+    r = cols -1
+    while l <= r:
+        m = (l + r) // 2
+        if target == matrix[midrow][m]:
+            return True
+        elif target < matrix[midrow][m]:
+            r = m - 1
+        else:
+            l = m + 1
+    return False
+
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+print(search(matrix, target))
