@@ -791,5 +791,49 @@ def evalRPN(tokens):
     return s[0]
 
 tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
-print(evalRPN(tokens))
+# print(evalRPN(tokens))
+
+
+#  16   Generate Parentheses
+
+"""
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+ 
+
+Example 1:
+
+Input: n = 3
+Output: ["((()))","(()())","(())()","()(())","()()()"]
+Example 2:
+
+Input: n = 1
+Output: ["()"]
+"""
+
+
+def generateParenthesis(n):
+    stack = []
+    res = []
+
+    def backtracking(openN, closeN):
+        if openN == closeN == n:
+            res.append("".join(stack))
+            return
+        
+        if openN < n:
+            stack.append("(")
+            backtracking(openN+1, closeN)
+            stack.pop()
+        
+        if closeN < openN:
+            stack.append(")")
+            backtracking(openN, closeN+1)
+            stack.pop()
+
+    backtracking(0, 0)
+    return res
+
+n = 5
+print(generateParenthesis(n))
 
