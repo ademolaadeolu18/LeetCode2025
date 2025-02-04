@@ -1226,4 +1226,47 @@ def maxProfit(prices):
 
 
 prices = [7,6,4,3,1]
-print(maxProfit(prices))
+# print(maxProfit(prices))
+
+
+#  25  Longest Substring Without Repeating Characters
+
+"""
+Given a string s, find the length of the longest 
+substring
+ without repeating characters.
+
+ 
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+"""
+def longestSubstring(s):
+    seen = set()
+    l = 0
+    maxchar = 0
+    for r in range(len(s)):
+        while s[r] in seen:
+            seen.remove(s[l])
+            l+=1
+        seen.add(s[r])
+        maxchar = max(maxchar, r -l+1)
+    return maxchar
+
+s = "pwwkew"
+print(longestSubstring(s))
