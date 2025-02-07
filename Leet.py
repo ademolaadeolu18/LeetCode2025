@@ -1352,4 +1352,90 @@ def canAttendMeetings(intervals) -> bool:
 
 
 intervals = [(0,30),(5,10),(15,20)]
-print(canAttendMeetings(intervals))
+# print(canAttendMeetings(intervals))
+
+
+
+# 27  Insert Interval
+
+"""
+You are given an array of non-overlapping intervals intervals where intervals[i] = [start_i, end_i] represents the start and the end time of the ith interval. intervals is initially sorted in ascending order by start_i.
+
+You are given another interval newInterval = [start, end].
+
+Insert newInterval into intervals such that intervals is still sorted in ascending order by start_i and also intervals still does not have any overlapping intervals. You may merge the overlapping intervals if needed.
+
+Return intervals after adding newInterval.
+
+Note: Intervals are non-overlapping if they have no common point. For example, [1,2] and [3,4] are non-overlapping, but [1,2] and [2,3] are overlapping.
+
+Example 1:
+
+Input: intervals = [[1,3],[4,6]], newInterval = [2,5]
+
+Output: [[1,6]]
+Example 2:
+
+Input: intervals = [[1,2],[3,5],[9,10]], newInterval = [6,7]
+
+Output: [[1,2],[3,5],[6,7],[9,10]]
+"""
+
+def insert(intervals, newInterval):
+    res = []
+
+    for i in range(len(intervals)):
+        if newInterval[1] < intervals[i][0]:
+            res.append(newInterval)
+            return res + intervals[i:]
+        elif newInterval[0] > intervals[i][1]:
+            res.append(intervals[i])
+        else:
+            newInterval = [min(newInterval[0], intervals[i][0]), max(intervals[i][1], newInterval[1])]
+    res.append(newInterval)
+    return res
+
+intervals = [[1,2],[3,5],[9,10]]
+newInterval = [6,7]
+# print(insert(intervals, newInterval))
+
+
+
+#  28  Merge Intervals
+
+"""
+Given an array of intervals where intervals[i] = [start_i, end_i], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+You may return the answer in any order.
+
+Note: Intervals are non-overlapping if they have no common point. For example, [1, 2] and [3, 4] are non-overlapping, but [1, 2] and [2, 3] are overlapping.
+
+Example 1:
+
+Input: intervals = [[1,3],[1,5],[6,7]]
+
+Output: [[1,5],[6,7]]
+Example 2:
+
+Input: intervals = [[1,2],[2,3]]
+
+Output: [[1,3]]
+
+
+intervals = [[1,2],[2,3], [3,7], [6, 10]]
+output = [1,10]
+"""
+def merge(intervals):
+    intervals.sort(key=lambda i:i[0])
+    res = [intervals[0]]
+
+    for i in range(1, len(intervals)):
+        if intervals[i][0] > res[-1][1]:
+            res.append(intervals[i])
+        else:
+            res[-1] = [min(res[-1][0], intervals[i][0]) , max(res[-1][1], intervals[i][1])]
+
+    return res
+
+intervals = [[1,2],[2,3], [3,7], [6, 10]]
+print(merge(intervals))
