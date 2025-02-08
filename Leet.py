@@ -1477,4 +1477,44 @@ def eraseOverlappingIntervals(intervals):
     return res
 
 intervals = [[1,2],[2,4]]
-print(eraseOverlappingIntervals(intervals))
+# print(eraseOverlappingIntervals(intervals))
+
+
+#  30   Meeting Rooms II
+
+"""
+Given an array of meeting time interval objects consisting of start and end times [[start_1,end_1],[start_2,end_2],...] (start_i < end_i), find the minimum number of days required to schedule all meetings without any conflicts.
+
+Example 1:
+
+Input: intervals = [(0,40),(5,10),(15,20)]
+
+Output: 2
+Explanation:
+day1: (0,40)
+day2: (5,10),(15,20)
+
+Example 2:
+
+Input: intervals = [(4,9)]
+
+Output: 1
+"""
+
+def minMeetingRooms(intervals):
+    start = sorted([i[0] for i in intervals])
+    end = sorted([i[1] for i in intervals])
+    count = res = s = e = 0
+    while s < len(start):
+        if start[s] < end[e]:
+            count+=1
+            s+=1
+        else:
+            count-=1
+            e+=1
+        res = max(res, count)
+    return res
+
+intervals = [[0,40],[5,10],[15,20]]
+
+print(minMeetingRooms(intervals))
