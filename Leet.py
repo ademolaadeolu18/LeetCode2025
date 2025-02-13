@@ -1647,7 +1647,7 @@ def pascalsTriange2(rowIndex):
     return res
 
 rowIndex = 3
-print(pascalsTriange2(rowIndex))
+# print(pascalsTriange2(rowIndex))
 
 
 #  34 Reorder Linked List
@@ -1846,4 +1846,28 @@ def findDuplicate(nums):
     return -1 
 
 nums = [1,2,3,4,4]
-print(findDuplicate(nums))
+# print(findDuplicate(nums))
+
+# Method 2
+
+def findDuplicate2(nums):
+    slow = 0
+    fast = 0
+
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast:
+            break
+    
+    slow2 = 0
+
+    while True:
+        slow2 = nums[slow2]
+        fast = nums[fast]
+        if slow2 == fast:
+            break
+    return slow2
+
+nums = [1,2,3,4,4]
+print(findDuplicate2(nums))
