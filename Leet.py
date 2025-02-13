@@ -1757,3 +1757,93 @@ def removeNthNodeFromEnd(head, n):
     left.next = left.next.next
 
     return dummy.next
+
+
+# 36 Add Two Numbers
+
+"""
+You are given two non-empty linked lists, l1 and l2, where each represents a non-negative integer.
+
+The digits are stored in reverse order, e.g. the number 123 is represented as 3 -> 2 -> 1 -> in the linked list.
+
+Each of the nodes contains a single digit. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Return the sum of the two numbers as a linked list.
+
+Example 1:
+
+
+
+Input: l1 = [1,2,3], l2 = [4,5,6]
+
+Output: [5,7,9]
+
+Explanation: 321 + 654 = 975.
+Example 2:
+
+Input: l1 = [9], l2 = [9]
+
+Output: [8,1]
+"""
+def addTwoNumbers(l1, l2):
+    dummy = ListNode()
+    curr = dummy
+    carry = 0
+
+    while l1 or l2  or carry:
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+        val = v1 + v2 + carry
+        carry = val //10
+        val = val % 10
+        curr.next = ListNode(val)
+        l1 = l1.next if l1 else None
+        l2 = l2.next if l2 else None
+        curr = curr.next
+    return dummy.next
+
+
+# 37  FInd the Duplicate Number
+
+"""
+You are given an array of integers nums containing n + 1 integers. Each integer in nums is in the range [1, n] inclusive.
+
+Every integer appears exactly once, except for one integer which appears two or more times. Return the integer that appears more than once.
+
+Example 1:
+
+Input: nums = [1,2,3,2,2]
+
+Output: 2
+Example 2:
+
+Input: nums = [1,2,3,4,4]
+
+Output: 4
+Follow-up: Can you solve the problem without modifying the array nums and using 
+O
+(
+1
+)
+O(1) extra space?
+
+Constraints:
+
+1 <= n <= 10000
+nums.length == n + 1
+1 <= nums[i] <= n
+"""
+
+
+# Method 1
+
+def findDuplicate(nums):
+    for num in nums:
+        idx = abs(num) - 1
+        if nums[idx] < 0:
+            return abs(num)
+        nums[idx] *= -1
+    return -1 
+
+nums = [1,2,3,4,4]
+print(findDuplicate(nums))
