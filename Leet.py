@@ -1873,23 +1873,52 @@ nums = [1,2,3,4,4]
 print(findDuplicate2(nums))
 
 
-
+#  38   Invert Binary Tree
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
-def invertTree(root):
+    def invertTree(self, root):
+        if not root:
+            return None
+        
+        tmp = root.left
+        root.left = root.right
+        root.right = tmp
+
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+
+
+# 39 Max Depth of a tree
+
+"""
+Given the root of a binary tree, return its depth.
+
+The depth of a binary tree is defined as the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+Example 1:
+
+
+
+Input: root = [1,2,3,null,null,4]
+
+Output: 3
+Example 2:
+
+Input: root = []
+
+Output: 0
+"""
+
+# Method 1  Recursive dfs 
+def maxDepth(root):
     if not root:
-        return None
+        return 0
     
-    tmp = root.left
-    root.left = root.right
-    root.right = tmp
-
-    invertTree(root.left)
-    invertTree(root.right)
-    return root
-
-
+    left_subtree = maxDepth(root.left)
+    right_subtree = maxDepth(root.right)
+    return 1 + max(left_subtree, right_subtree)
