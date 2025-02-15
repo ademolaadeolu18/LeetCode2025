@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 import math
 # 1 Group Anagrams
 """
@@ -1922,3 +1922,39 @@ def maxDepth(root):
     left_subtree = maxDepth(root.left)
     right_subtree = maxDepth(root.right)
     return 1 + max(left_subtree, right_subtree)
+
+# Method 2 Iterative bfs
+
+def maxDepth2(root):
+    if not root:
+        return 0
+    
+    level = 0
+    q = deque([root])
+
+    while q:
+        for i in range(len(q)):
+            node = q.popleft()
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+        level += 1
+    return level
+
+
+# 40 Diameter of a Binary Tree
+def diameterOfBinaryTree(root):
+    res = 0
+
+    def dfs(curr):
+        if not curr:
+            return 0
+        
+        left = dfs(curr.left)
+        right = dfs(curr.right)
+        nonlocal res
+        res = max(res, left + right)
+        return 1 + max(left, right)
+    dfs(root)
+    return res
