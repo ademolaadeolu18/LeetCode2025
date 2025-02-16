@@ -1997,3 +1997,42 @@ def isBalanced(root):
         balanced = left[0] and right[0] and abs(left[1] - right[1]) <=1
         return [balanced, 1 + max(left[1], right[1])]
     return dfs(root)[0]
+
+
+
+# 41 Same Binary Tree
+
+"""
+Given the roots of two binary trees p and q, return true if the trees are equivalent, otherwise return false.
+
+Two binary trees are considered equivalent if they share the exact same structure and the nodes have the same values.
+
+Example 1:
+
+
+
+Input: p = [1,2,3], q = [1,2,3]
+
+Output: true
+Example 2:
+
+
+
+Input: p = [4,7], q = [4,null,7]
+
+Output: false
+Example 3:
+
+
+
+Input: p = [1,2,3], q = [1,3,2]
+
+Output: false
+
+"""
+def isSameTree(p, q):
+    if not p and not q:
+        return True
+    if not p or not q or p.val != q.val:
+        return False
+    return ((isSameTree(p.left, q.left)) and (p.right, q.right))
