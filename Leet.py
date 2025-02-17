@@ -2129,5 +2129,104 @@ def lowestCommonAncestor2(root, p, q):
         else:
             return curr
  
+ # 44 Level Order Traversal
+
+"""
+ Given a binary tree root, return the level order traversal of it as a nested list, where each sublist contains the values of nodes at a particular level in the tree, from left to right.
+
+Example 1:
+
+
+
+Input: root = [1,2,3,4,5,6,7]
+
+Output: [[1],[2,3],[4,5,6,7]]
+Example 2:
+
+Input: root = [1]
+
+Output: [[1]]
+Example 3:
+
+Input: root = []
+
+Output: []
+
+"""
+
+def levelOrderTraversal(root):
+    q = deque()
+    q.append(root)
+    res = []
+    while q:
+        qlen = len(q)
+        level = []
+        for i in range(qlen):
+            node = q.popleft()
+            if node:
+                level.append(node.val)
+                q.append(node.left)
+                q.append(node.right)
+        if level:
+            res.append(level)
+    return res
+
+
+#     45  Binary Tree Right Side View
+
+"""
+Solved
+Medium
+Topics
+Companies
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+Example 1:
+
+Input: root = [1,2,3,null,5,null,4]
+
+Output: [1,3,4]
+
+Explanation:
+
+Example 2:
+
+Input: root = [1,2,3,4,null,null,null,5]
+
+Output: [1,3,4,5]
+
+Explanation:
+
+Example 3:
+
+Input: root = [1,null,3]
+
+Output: [1,3]
+
+Example 4:
+
+Input: root = []
+
+Output: []
+"""
+
+def rightSideView(root):
+    q = deque()
+    q.append(root)
+    res = []
+
+    while q:
+        qlen = len(q)
+        level = []
+        for i in range(qlen):
+            node = q.popleft()
+            if node:
+                level.append(node.val)
+                q.append(node.left)
+                q.append(node.right)
+        if level:
+            res.append(level[-1])
+    return res
+
 
 
