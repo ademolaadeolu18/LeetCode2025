@@ -2106,6 +2106,7 @@ Input: root = [2,1], p = 2, q = 1
 Output: 2
 """ 
 
+# Method 1
 def lowestCommonAncestor(root, p , q):
     if not root or not p or not q:
         return None
@@ -2116,5 +2117,17 @@ def lowestCommonAncestor(root, p , q):
     
     else:
         return root
+    
+# Method 2
+def lowestCommonAncestor2(root, p, q):
+    curr = root
+    while curr:
+        if p.val > curr.val and q.val > curr.val:
+            curr = curr.right
+        elif p.val < curr.val and q.val < curr.val:
+            curr = curr.left
+        else:
+            return curr
+ 
 
 
