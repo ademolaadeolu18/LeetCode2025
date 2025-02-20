@@ -2280,5 +2280,81 @@ def goodNode(root):
 
 
 
+#   47   Valid Binary Search Tree
+
+"""
+Given the root of a binary tree, return true if it is a valid binary search tree, otherwise return false.
+
+A valid binary search tree satisfies the following constraints:
+
+The left subtree of every node contains only nodes with keys less than the node's key.
+The right subtree of every node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees are also binary search trees.
+Example 1:
+
+
+
+Input: root = [2,1,3]
+
+Output: true
+Example 2:
+
+
+
+Input: root = [1,2,3]
+
+Output: false
+"""
+def isvalid(root):
+    def dfs(node, left, right):
+        if not node:
+            return True
+        
+        if not (left < node.val < right):
+            return False
+        
+        return dfs(node.left, left, node.val) and dfs(node.right, node.val, right)
+    return dfs(root, float("-inf"), float("inf"))
+
+
+
+# 48  Kth Smallest Element in a BST
+
+"""
+
+Solved
+Medium
+Topics
+Companies
+Hint
+Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+
+ 
+
+Example 1:
+
+
+Input: root = [3,1,4,null,2], k = 1
+Output: 1
+Example 2:
+
+
+Input: root = [5,3,6,2,4,null,null,1], k = 3
+Output: 3
+"""
+def KthSmallest(root, k):
+    curr = root
+    stack = []
+
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+
+        k -= 1
+        if k == 0:
+            return curr.val
+        curr = curr.right
 
 
