@@ -2358,3 +2358,21 @@ def KthSmallest(root, k):
         curr = curr.right
 
 
+# Method 2
+def KthSmallest(root, k):
+    res = root.val
+    cnt = k
+    def dfs(node):
+        nonlocal res, cnt
+        if not node:
+            return
+        dfs(node.left)
+        cnt -= 1
+        if cnt == 0:
+            res = node.val
+            return
+        dfs(node.right)
+    dfs(root)
+    return res
+
+
