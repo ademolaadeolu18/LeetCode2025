@@ -2468,3 +2468,104 @@ s1 = "ab"
 s2 = "eidbobaoo"
 
 print(checkInclusion(s1, s2))
+
+
+
+# 51  Minimum WIndow Substring
+
+"""
+Given two strings s and t of lengths m and n respectively, return the minimum window 
+substring
+ of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+ 
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+"""
+
+
+
+def minWindow(s, t):
+    if t == "": return ""
+    countT, window = {}, {}
+    for c in t:
+        countT[c] = 1 + countT.get(c, 0)
+    need = len(countT)
+    l = 0
+    res, resLen = [-1, -1], float("inf") 
+    have = 0
+    for r in range(len(s)):
+        c = s[r]
+        window[c] = 1 + window.get(c, 0)
+        if c in countT and window[c] == countT[c]:
+            have+=1
+        while need == have:
+            if r - l + 1 < resLen:
+                res = [l, r]
+                resLen = r - l + 1
+            c = s[l]
+            window[c] -=1
+            if c in countT and window[c] < countT[c]:
+                have -=1
+            l+=1
+    l, r  = res
+    return s[l:r+1] if resLen != float("inf") else ""
+
+s = "ADOBECODEBANC"
+t = "ABC"
+
+print(minWindow(s, t))   
+
+
+#  52   Palindrome Number
+
+"""
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+"""
+def isPalindrome(x):
+    if x < 0:
+        return False
+    x = str(x)
+    l = 0
+    r = len(x) -1 
+    while l <= r:
+        if x[l] != x[r]:
+            return False
+        l+=1
+        r-=1
+    return True
+
+
+x = -121
+print(isPalindrome(x))   
