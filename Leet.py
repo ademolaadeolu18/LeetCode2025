@@ -1870,7 +1870,7 @@ def findDuplicate2(nums):
     return slow2
 
 nums = [1,2,3,4,4]
-print(findDuplicate2(nums))
+# print(findDuplicate2(nums))
 
 
 #  38   Invert Binary Tree
@@ -2467,7 +2467,7 @@ def checkInclusion(s1, s2):
 s1 = "ab" 
 s2 = "eidbobaoo"
 
-print(checkInclusion(s1, s2))
+# print(checkInclusion(s1, s2))
 
 
 
@@ -2531,7 +2531,7 @@ def minWindow(s, t):
 s = "ADOBECODEBANC"
 t = "ABC"
 
-print(minWindow(s, t))   
+# print(minWindow(s, t))   
 
 
 #  52   Palindrome Number
@@ -2567,5 +2567,21 @@ def isPalindrome(x):
     return True
 
 
-x = -121
-print(isPalindrome(x))   
+x = 121
+# print(isPalindrome(x))   
+
+
+# Method 2
+def isPalindrome2(x):
+    if x  < 0:
+        return False
+    
+    num = x
+    reverse = 0
+    while num > 0:
+        digit = num % 10
+        reverse = reverse * 10 + digit
+        num//=10
+    return x == reverse
+
+print(isPalindrome2(x))
