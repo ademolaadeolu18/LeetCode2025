@@ -2961,10 +2961,10 @@ nums = [0]
 
 
 
-#    60
+#    60   Word Search
 
 """
-Word Search
+
 Solved
 Medium
 Topics
@@ -3014,5 +3014,52 @@ def wordSearch(board, word):
     return False
 
 board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
-word = "ABCB"
-print(wordSearch(board, word))
+# word = "ABCB"
+# print(wordSearch(board, word))
+
+
+#   61 Palindrome Partitioning
+"""
+Solved 
+Given a string s, split s into substrings where every substring is a palindrome. Return all possible lists of palindromic substrings.
+
+You may return the solution in any order.
+
+Example 1:
+
+Input: s = "aab"
+
+Output: [["a","a","b"],["aa","b"]]
+Example 2:
+
+Input: s = "a"
+
+Output: [["a"]]
+"""
+
+def isPalindrome(s, i, j):
+    while i < j:
+        if s[i] != s[j]:
+            return False
+        i+=1
+        j-=1
+    return True
+
+
+def palindromePartition(s):
+    res = []
+    part = []
+
+    def dfs(i):
+        if i >= len(s):
+            res.append(part.copy())
+            return
+        for j in range(i, len(s)):
+            if isPalindrome(s, i,j):
+                part.append(s[i:j+1])
+                dfs(j+1)
+                part.pop()
+    dfs(0)
+    return res
+s = "aab"
+print(palindromePartition(s))
