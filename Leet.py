@@ -3182,5 +3182,41 @@ def solveNQueens(n):
     return res
 
 n = 4
-print(solveNQueens(n))
+# print(solveNQueens(n))
 
+
+#   64 Climbing Stairs
+
+"""
+
+Solved 
+You are given an integer n representing the number of steps to reach the top of a staircase. You can climb with either 1 or 2 steps at a time.
+
+Return the number of distinct ways to climb to the top of the staircase.
+
+Example 1:
+
+Input: n = 2
+
+Output: 2
+Explanation:
+
+1 + 1 = 2
+2 = 2
+Example 2:
+
+Input: n = 3
+
+Output: 3
+"""
+def climbingStairs(n):
+    one, two = 1,1
+
+    for i in range(n-1):
+        tmp = one
+        one = one + two
+        two = tmp
+    return one
+
+n = 3
+print(climbingStairs(n))
