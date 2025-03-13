@@ -3267,4 +3267,98 @@ def minCost(cost):
     return min(cost[0], cost[1])
 
 cost = [1,100,1,1,1,100,1,1,100,1]
-print(minCost(cost))
+# print(minCost(cost))
+
+
+#   66   House Robber
+
+"""
+
+Solved
+Medium
+Topics
+Companies
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+Example 2:
+
+Input: nums = [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+"""
+def maxMoney(nums):
+    if not nums:
+        return 0
+    
+    if len(nums) < 3:
+        return max(nums)
+    
+    res = [0] * len(nums)
+    res[0] = nums[0]
+    res[1] = max(nums[0], nums[1])
+    for i in range(2, len(nums)):
+        res[i] = max(res[i-1], nums[i]+ res[i-2])
+    return res[-1]
+
+nums = [2,7,9,3,1]
+# print(maxMoney(nums))
+
+
+#  67  House Robber II
+"""
+
+Solved
+Medium
+Topics
+Companies
+Hint
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+ 
+
+Example 1:
+
+Input: nums = [2,3,2]
+Output: 3
+Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+Example 2:
+
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+Example 3:
+
+Input: nums = [1,2,3]
+Output: 3
+"""
+def maxMoney2(nums):
+    if len(nums) < 3:
+        return max(nums)
+    
+    def helper(nums):
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+
+        for i in range(2, len(nums)):
+            dp[i] = max(dp[i-1], nums[i] + dp[i-2])
+        return dp[-1]
+    
+    return max(helper(nums[1:]), helper(nums[:-1]))
+
+nums = [1,2,3,1]
+
+print(maxMoney2(nums))
