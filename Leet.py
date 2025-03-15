@@ -3409,3 +3409,14 @@ def longestPal(s):
 s = "babad"
 print(longestPal(s))
 
+
+
+## TOday I Learnt about heaps/priority queue
+# 
+# They have two properties
+# Structural priority
+# Order Priority
+# For a min heap, the root is the smallest value , also all lvelevs must be filled except leaf nodes
+# And viceversa for max heap
+#Adding/removing an element/node is Olog(N)
+
