@@ -3462,3 +3462,6 @@ def countSubstrings(s):
 
 s = "aaa"
 print(countSubstrings(s))
+
+
+## Revised a couple of past solutions
