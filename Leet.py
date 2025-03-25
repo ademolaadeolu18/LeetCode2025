@@ -3640,4 +3640,79 @@ def wordBreak(s, wordDict):
     return dp[0]
 s = "applepenapple"
 wordDict = ["apple","pen","ape"]
-print(wordBreak(s, wordDict))
+# print(wordBreak(s, wordDict))
+
+#  74   Longest Increasing Subsequence
+"""
+Solved 
+Given an integer array nums, return the length of the longest strictly increasing subsequence.
+
+A subsequence is a sequence that can be derived from the given sequence by deleting some or no elements without changing the relative order of the remaining characters.
+
+For example, "cat" is a subsequence of "crabt".
+Example 1:
+
+Input: nums = [9,1,4,2,3,3,7]
+
+Output: 4
+Explanation: The longest increasing subsequence is [1,2,3,7], which has a length of 4.
+
+Example 2:
+
+Input: nums = [0,3,1,3,2,3]
+
+Output: 4
+"""
+def LongIncSubs(nums):
+    Lis = [1] * len(nums)
+    for i in range(len(nums), -1, -1):
+        for j in range(i+1, len(nums)):
+            if nums[i] < nums[j]:
+                Lis[i] = max(Lis[i], 1 + Lis[j])
+    return max(Lis)
+
+nums = [0,3,1,3,2,3]
+print(LongIncSubs(nums))
+
+
+##75  Partition Equal Subset Sum
+"""
+
+Solved 
+You are given an array of positive integers nums.
+
+Return true if you can partition the array into two subsets, subset1 and subset2 where sum(subset1) == sum(subset2). Otherwise, return false.
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+
+Output: true
+Explanation: The array can be partitioned as [1, 4] and [2, 3].
+
+Example 2:
+
+Input: nums = [1,2,3,4,5]
+
+Output: false
+"""
+def canPartition(nums):
+    if sum(nums) % 2:
+        return False
+
+    dp = set()
+    dp.add(0)
+    target = sum(nums)//2
+
+    for i in range(len(nums)-1, -1, -1):
+        newdp = set()
+        for t in dp:
+            if t + nums[i] == target:
+                return True
+            newdp.add(t + nums[i])
+            newdp.add(t)
+        dp = newdp
+    return False
+
+nums = [1,2,3,4,5]
+print(canPartition(nums))
